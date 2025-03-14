@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Units Markup language (UnitsML) Schema - Lite
+    Website: http://unitsml.nist.gov
+    Version History: http://unitsml.nist.gov/Schema/schema_changes.txt
+-->
+<xs:schema xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema_lite-0.9.18" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema_lite-0.9.18" elementFormDefault="qualified" attributeFormDefault="unqualified" version="0.9.18">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+	<!--=== Root-Node of an UnitsML document ===-->
+	<xs:element name="UnitsML" type="unitsml:UnitsMLType">
+		<xs:annotation>
+			<xs:documentation>Container for UnitsML units, quantities, and prefixes.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="UnitsMLType">
+		<xs:annotation>
+			<xs:documentation>ComplexType for the root element of an UnitsML document.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="unitsml:UnitSet" minOccurs="0"/>
+			<xs:element ref="unitsml:DimensionSet" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--=== Global document elements ===-->
+	<!--     === Unit elements ===-->
+	<xs:element name="UnitSet" type="unitsml:UnitSetType">
+		<xs:annotation>
+			<xs:documentation>Container for units. Use in UnitsML container or directly incorporate into a host schema.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Unit" type="unitsml:UnitType">
+		<xs:annotation>
+			<xs:documentation>Element for describing units. Use in containers UnitSet or directly incorporate into a host schema.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UnitName" type="unitsml:NameType">
+		<xs:annotation>
+			<xs:documentation>Element containing the unit name.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="UnitSymbol" type="unitsml:SymbolType">
+		<xs:annotation>
+			<xs:documentation>Element containing various unit symbols.  Examples include Airing (ASCII), Ã… (HTML).</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="RootUnits" type="unitsml:RootUnitsType">
+		<xs:annotation>
+			<xs:documentation>Container for defining derived units in terms of their root units. This allows a precise definition of a wide range of units. The goal is to improve interoperability among applications and databases which use derived units based on commonly encountered root units.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="EnumeratedRootUnit" type="unitsml:EnumeratedRootUnitType">
+		<xs:annotation>
+			<xs:documentation>Element for a root unit (from an extensive enumerated list) allowing an optional prefix and power. E.g., mm^2</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--     === Dimension elements ===-->
+	<xs:element name="DimensionSet" type="unitsml:DimensionSetType">
+		<xs:annotation>
+			<xs:documentation>Container for dimensions.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Dimension" type="unitsml:DimensionType">
+		<xs:annotation>
+			<xs:documentation>Element to express the dimension of a unit or quantity in terms of the SI base quantities length, mass, time, electric current, thermodynamic temperature, amount of substance, and luminous intensity.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Length" type="unitsml:LengthType">
+		<xs:annotation>
+			<xs:documentation>Element containing the dimension of the quantity length.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Mass" type="unitsml:MassType">
+		<xs:annotation>
+			<xs:documentation>Element containing the dimension of the quantity mass.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Time" type="unitsml:TimeType">
+		<xs:annotation>
+			<xs:documentation>Element containing the dimension of the quantity time.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ElectricCurrent" type="unitsml:ElectricCurrentType">
+		<xs:annotation>
+			<xs:documentation>Element containing the dimension of the quantity electric current.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ThermodynamicTemperature" type="unitsml:ThermodynamicTemperatureType">
+		<xs:annotation>
+			<xs:documentation>Element containing the dimension of the quantity thermodynamic temperature.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="AmountOfSubstance" type="unitsml:AmountOfSubstanceType">
+		<xs:annotation>
+			<xs:documentation>Element containing the dimension of the quantity amount of substance.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="LuminousIntensity" type="unitsml:LuminousIntensityType">
+		<xs:annotation>
+			<xs:documentation>Element containing the dimension of the quantity luminous intensity.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--=== Attribute groups (global) ===-->
+	<xs:attributeGroup name="initialUnit">
+		<xs:annotation>
+			<xs:documentation>URI indicating the unitID of the starting unit for the conversion. For units which are defined in the same document, the URI should consist of a pound sign (#) followed by the ID value.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="initialUnit" type="xs:anyURI" use="required">
+			<xs:annotation>
+				<xs:documentation>URI indicating the unitID of the starting unit for the conversion. For units which are defined in the same document, the URI should consist of a pound sign (#) followed by the ID value.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="sourceName">
+		<xs:annotation>
+			<xs:documentation>Name of relevant publication.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="sourceName" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Name of relevant publication.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="sourceURL">
+		<xs:annotation>
+			<xs:documentation>Relevant URL for available information.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="sourceURL" type="xs:anyURI" use="optional">
+			<xs:annotation>
+				<xs:documentation>Relevant URL for available information.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="powerRational">
+		<xs:annotation>
+			<xs:documentation>An exponent of the unit, specified as powerNumerator and powerDenominator.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="powerNumerator" type="xs:byte" use="optional" default="1">
+			<xs:annotation>
+				<xs:documentation>An integer exponent of the unit.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="prefix">
+		<xs:annotation>
+			<xs:documentation>Prefix identifier; e.g., m, k, M, G.  [Enumeration order is by prefix magnitude (Y to y) followed by binary prefixes.]</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="prefix">
+			<xs:annotation>
+				<xs:documentation>Prefix identifier; e.g., m, k, M, G.  [Enumeration order is by prefix magnitude (Y to y) followed by binary prefixes.]</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="Y">
+						<xs:annotation>
+							<xs:documentation>yotta: septillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Z">
+						<xs:annotation>
+							<xs:documentation>zetta: sextillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="E">
+						<xs:annotation>
+							<xs:documentation>exa: quintillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="P">
+						<xs:annotation>
+							<xs:documentation>peta: quadrillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="T">
+						<xs:annotation>
+							<xs:documentation>tera: trillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="G">
+						<xs:annotation>
+							<xs:documentation>giga: billion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="M">
+						<xs:annotation>
+							<xs:documentation>mega: million</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="k">
+						<xs:annotation>
+							<xs:documentation>kilo: thousand</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="h">
+						<xs:annotation>
+							<xs:documentation>hecto: hundred</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="da">
+						<xs:annotation>
+							<xs:documentation>deca: ten</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="d">
+						<xs:annotation>
+							<xs:documentation>deci: tenth</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="c">
+						<xs:annotation>
+							<xs:documentation>centi: hundredth</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="m">
+						<xs:annotation>
+							<xs:documentation>milli: thousandth</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="mu">
+						<xs:annotation>
+							<xs:documentation>micro: millionth</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="n">
+						<xs:annotation>
+							<xs:documentation>nano: billionth</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="p">
+						<xs:annotation>
+							<xs:documentation>pico: trillionth</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="f">
+						<xs:annotation>
+							<xs:documentation>femto: quadrillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="a">
+						<xs:annotation>
+							<xs:documentation>atto: quintillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="z">
+						<xs:annotation>
+							<xs:documentation>zepto: sextillion:</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="y">
+						<xs:annotation>
+							<xs:documentation>yocto: septillion</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Ki">
+						<xs:annotation>
+							<xs:documentation>kibi: kilo binary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Mi">
+						<xs:annotation>
+							<xs:documentation>mebi: mega binary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Gi">
+						<xs:annotation>
+							<xs:documentation>gibi: giga binary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Ti">
+						<xs:annotation>
+							<xs:documentation>tebi: tera binary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Zi">
+						<xs:annotation>
+							<xs:documentation>pebi: peta binary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Ei">
+						<xs:annotation>
+							<xs:documentation>exbi: exa binary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Yi">
+						<xs:annotation>
+							<xs:documentation>yobi: yotta binary</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="dimensionURL">
+		<xs:annotation>
+			<xs:documentation>URL to a representation of the unit or quantity in terms of the 7 SI base dimensions.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="dimensionURL" type="xs:anyURI">
+			<xs:annotation>
+				<xs:documentation>URL to a representation of the unit or quantity in terms of the 7 SI base dimensions.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!--=== Type definitions ===-->
+	<!--     === Unit specific Types ===-->
+	<xs:complexType name="UnitSetType">
+		<xs:annotation>
+			<xs:documentation>Type for the unit container.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="unitsml:Unit" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Element for describing units. Use in containers UnitSet or directly incorporate into a host schema.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UnitType">
+		<xs:annotation>
+			<xs:documentation>Type for the unit.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="unitsml:UnitName" maxOccurs="unbounded"/>
+			<xs:element ref="unitsml:UnitSymbol" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="unitsml:RootUnits" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Container for defining derived units in terms of their root units. This allows a precise definition of a wide range of units. The goal is to improve interoperability among applications and databases which use derived units based on commonly encountered root units.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="xml:id" use="required"/>
+		<xs:attributeGroup ref="unitsml:dimensionURL">
+			<xs:annotation>
+				<xs:documentation>Reference to a representation of the unit or quantity in terms of the 7 SI base dimensions.</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+	</xs:complexType>
+	<xs:complexType name="RootUnitsType">
+		<xs:annotation>
+			<xs:documentation>Type for the container for defining derived units in terms of their root units. This allows a precise definition of a wide range of units. The goal is to improve interoperability among applications and databases which use derived units based on commonly encountered base units.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="unitsml:EnumeratedRootUnit" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Element for a root unit (from an extensive enumerated list) allowing an optional prefix and power. E.g., mm^2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnumeratedRootUnitType">
+		<xs:annotation>
+			<xs:documentation>Type for the element for a root unit (from an extensive enumerated list) allowing an optional prefix and power. E.g., mm^2</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="unit" use="required">
+			<xs:annotation>
+				<xs:documentation>Unit identifier; the enumerated list is basically English unit names in lowercase, with a few upper case exceptions, e.g., 32F, mmHg, pH.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="meter"/>
+					<xs:enumeration value="gram"/>
+					<xs:enumeration value="second"/>
+					<xs:enumeration value="ampere"/>
+					<xs:enumeration value="kelvin"/>
+					<xs:enumeration value="mole"/>
+					<xs:enumeration value="candela"/>
+					<xs:enumeration value="radian"/>
+					<xs:enumeration value="steradian"/>
+					<xs:enumeration value="hertz"/>
+					<xs:enumeration value="newton"/>
+					<xs:enumeration value="pascal"/>
+					<xs:enumeration value="joule"/>
+					<xs:enumeration value="watt"/>
+					<xs:enumeration value="coulomb"/>
+					<xs:enumeration value="volt"/>
+					<xs:enumeration value="farad"/>
+					<xs:enumeration value="ohm"/>
+					<xs:enumeration value="siemens"/>
+					<xs:enumeration value="weber"/>
+					<xs:enumeration value="tesla"/>
+					<xs:enumeration value="henry"/>
+					<xs:enumeration value="degree_Celsius"/>
+					<xs:enumeration value="lumen"/>
+					<xs:enumeration value="lux"/>
+					<xs:enumeration value="katal"/>
+					<xs:enumeration value="becquerel"/>
+					<xs:enumeration value="gray"/>
+					<xs:enumeration value="sievert"/>
+					<xs:enumeration value="minute"/>
+					<xs:enumeration value="hour"/>
+					<xs:enumeration value="day"/>
+					<xs:enumeration value="arc_degree"/>
+					<xs:enumeration value="arc_minute"/>
+					<xs:enumeration value="arc_second"/>
+					<xs:enumeration value="liter"/>
+					<xs:enumeration value="metric_ton"/>
+					<xs:enumeration value="electronvolt"/>
+					<xs:enumeration value="unified_atomic_mass_unit"/>
+					<xs:enumeration value="astronomical_unit"/>
+					<xs:enumeration value="atomic_unit_of_1st_hyperpolarizablity"/>
+					<xs:enumeration value="atomic_unit_of_2nd_hyperpolarizablity"/>
+					<xs:enumeration value="atomic_unit_of_action"/>
+					<xs:enumeration value="atomic_unit_of_charge"/>
+					<xs:enumeration value="atomic_unit_of_charge_density"/>
+					<xs:enumeration value="atomic_unit_of_current"/>
+					<xs:enumeration value="atomic_unit_of_electric_dipole_moment"/>
+					<xs:enumeration value="atomic_unit_of_electric_field"/>
+					<xs:enumeration value="atomic_unit_of_electric_field_gradient"/>
+					<xs:enumeration value="atomic_unit_of_electric_polarizablity"/>
+					<xs:enumeration value="atomic_unit_of_electric_potential"/>
+					<xs:enumeration value="atomic_unit_of_electric_quadrupole_moment"/>
+					<xs:enumeration value="atomic_unit_of_energy"/>
+					<xs:enumeration value="atomic_unit_of_force"/>
+					<xs:enumeration value="atomic_unit_of_length"/>
+					<xs:enumeration value="atomic_unit_of_magnetic_dipole_moment"/>
+					<xs:enumeration value="atomic_unit_of_magnetic_flux_density"/>
+					<xs:enumeration value="atomic_unit_of_magnetizability"/>
+					<xs:enumeration value="atomic_unit_of_mass"/>
+					<xs:enumeration value="atomic_unit_of_momentum"/>
+					<xs:enumeration value="atomic_unit_of_permittivity"/>
+					<xs:enumeration value="atomic_unit_of_time"/>
+					<xs:enumeration value="atomic_unit_of_velocity"/>
+					<xs:enumeration value="natural_unit_of_action"/>
+					<xs:enumeration value="natural_unit_of_action_in_eV_s"/>
+					<xs:enumeration value="natural_unit_of_energy"/>
+					<xs:enumeration value="natural_unit_of_energy_in_MeV"/>
+					<xs:enumeration value="natural_unit_of_length"/>
+					<xs:enumeration value="natural_unit_of_mass"/>
+					<xs:enumeration value="natural_unit_of_momentum"/>
+					<xs:enumeration value="natural_unit_of_momentum_in_MeV_per_c"/>
+					<xs:enumeration value="natural_unit_of_time"/>
+					<xs:enumeration value="natural_unit_of_velocity"/>
+					<xs:enumeration value="nautical_mile"/>
+					<xs:enumeration value="knot"/>
+					<xs:enumeration value="angstrom"/>
+					<xs:enumeration value="are"/>
+					<xs:enumeration value="hectare"/>
+					<xs:enumeration value="barn"/>
+					<xs:enumeration value="bar"/>
+					<xs:enumeration value="gal"/>
+					<xs:enumeration value="curie"/>
+					<xs:enumeration value="roentgen"/>
+					<xs:enumeration value="rad"/>
+					<xs:enumeration value="rem"/>
+					<xs:enumeration value="erg"/>
+					<xs:enumeration value="dyne"/>
+					<xs:enumeration value="barye"/>
+					<xs:enumeration value="poise"/>
+					<xs:enumeration value="rhe"/>
+					<xs:enumeration value="stokes"/>
+					<xs:enumeration value="darcy"/>
+					<xs:enumeration value="kayser"/>
+					<xs:enumeration value="lambert"/>
+					<xs:enumeration value="phot"/>
+					<xs:enumeration value="thermo_calorie"/>
+					<xs:enumeration value="table_calorie"/>
+					<xs:enumeration value="debye"/>
+					<xs:enumeration value="abampere"/>
+					<xs:enumeration value="abcoulomb"/>
+					<xs:enumeration value="abfarad"/>
+					<xs:enumeration value="abhenry"/>
+					<xs:enumeration value="abohm"/>
+					<xs:enumeration value="abmho"/>
+					<xs:enumeration value="abvolt"/>
+					<xs:enumeration value="abwatt"/>
+					<xs:enumeration value="maxwell"/>
+					<xs:enumeration value="gauss"/>
+					<xs:enumeration value="gilbert"/>
+					<xs:enumeration value="oersted"/>
+					<xs:enumeration value="stilb"/>
+					<xs:enumeration value="statampere"/>
+					<xs:enumeration value="statcoulomb"/>
+					<xs:enumeration value="statfarad"/>
+					<xs:enumeration value="stathenry"/>
+					<xs:enumeration value="statohm"/>
+					<xs:enumeration value="statmho"/>
+					<xs:enumeration value="statvolt"/>
+					<xs:enumeration value="statwatt"/>
+					<xs:enumeration value="statweber"/>
+					<xs:enumeration value="stattesla"/>
+					<xs:enumeration value="long_ton"/>
+					<xs:enumeration value="short_ton"/>
+					<xs:enumeration value="gross_hundredweight"/>
+					<xs:enumeration value="hundredweight"/>
+					<xs:enumeration value="pound"/>
+					<xs:enumeration value="ounce"/>
+					<xs:enumeration value="dram"/>
+					<xs:enumeration value="troy_pound"/>
+					<xs:enumeration value="troy_ounce"/>
+					<xs:enumeration value="pennyweight"/>
+					<xs:enumeration value="apothecaries_dram"/>
+					<xs:enumeration value="scruple"/>
+					<xs:enumeration value="grain"/>
+					<xs:enumeration value="slug"/>
+					<xs:enumeration value="pound_force"/>
+					<xs:enumeration value="poundal"/>
+					<xs:enumeration value="kip"/>
+					<xs:enumeration value="ton_force"/>
+					<xs:enumeration value="kilogram_force"/>
+					<xs:enumeration value="inch"/>
+					<xs:enumeration value="foot"/>
+					<xs:enumeration value="yard"/>
+					<xs:enumeration value="mile"/>
+					<xs:enumeration value="us_survey_inch"/>
+					<xs:enumeration value="us_survey_foot"/>
+					<xs:enumeration value="us_survey_yard"/>
+					<xs:enumeration value="us_survey_fathom"/>
+					<xs:enumeration value="us_survey_rod"/>
+					<xs:enumeration value="us_survey_chain"/>
+					<xs:enumeration value="us_survey_link"/>
+					<xs:enumeration value="us_survey_furlong"/>
+					<xs:enumeration value="us_survey_mile"/>
+					<xs:enumeration value="us_acre"/>
+					<xs:enumeration value="imperial_gallon"/>
+					<xs:enumeration value="imperial_quart"/>
+					<xs:enumeration value="imperial_pint"/>
+					<xs:enumeration value="imperial_gill"/>
+					<xs:enumeration value="imperial_ounce"/>
+					<xs:enumeration value="us_gallon"/>
+					<xs:enumeration value="us_quart"/>
+					<xs:enumeration value="us_pint"/>
+					<xs:enumeration value="us_cup"/>
+					<xs:enumeration value="us_fill"/>
+					<xs:enumeration value="us_fluid_ounce"/>
+					<xs:enumeration value="us_fluid_dram"/>
+					<xs:enumeration value="us_minim"/>
+					<xs:enumeration value="us_tablespoon"/>
+					<xs:enumeration value="us_teaspoon"/>
+					<xs:enumeration value="us_bushel"/>
+					<xs:enumeration value="us_peck"/>
+					<xs:enumeration value="us_dry_quart"/>
+					<xs:enumeration value="us_dry_pint"/>
+					<xs:enumeration value="thermo_kg_calorie"/>
+					<xs:enumeration value="table_kg_calorie"/>
+					<xs:enumeration value="us_label_teaspoon"/>
+					<xs:enumeration value="us_label_tablespoon"/>
+					<xs:enumeration value="us_label_cup"/>
+					<xs:enumeration value="us_label_fluid_ounce"/>
+					<xs:enumeration value="us_label_ounce"/>
+					<xs:enumeration value="horsepower"/>
+					<xs:enumeration value="electric_horsepower"/>
+					<xs:enumeration value="boiler_horsepower"/>
+					<xs:enumeration value="metric_horsepower"/>
+					<xs:enumeration value="water_horsepower"/>
+					<xs:enumeration value="uk_horsepower"/>
+					<xs:enumeration value="degree_Fahrenheit"/>
+					<xs:enumeration value="degree_Rankine"/>
+					<xs:enumeration value="torr"/>
+					<xs:enumeration value="standard_atmosphere"/>
+					<xs:enumeration value="technical_atmosphere"/>
+					<xs:enumeration value="mm_Hg"/>
+					<xs:enumeration value="cm_Hg"/>
+					<xs:enumeration value="0C_cm_Hg"/>
+					<xs:enumeration value="in_Hg"/>
+					<xs:enumeration value="32F_in_Hg"/>
+					<xs:enumeration value="60F_in_Hg"/>
+					<xs:enumeration value="ft_Hg"/>
+					<xs:enumeration value="mm_water"/>
+					<xs:enumeration value="cm_water"/>
+					<xs:enumeration value="4C_cm_water"/>
+					<xs:enumeration value="in_water"/>
+					<xs:enumeration value="39F_in_water"/>
+					<xs:enumeration value="60F_in_water"/>
+					<xs:enumeration value="ft_water"/>
+					<xs:enumeration value="39F_ft_water"/>
+					<xs:enumeration value="light_year"/>
+					<xs:enumeration value="parsec"/>
+					<xs:enumeration value="printers_pica"/>
+					<xs:enumeration value="computer_pica"/>
+					<xs:enumeration value="printers_point"/>
+					<xs:enumeration value="computer_point"/>
+					<xs:enumeration value="thermo_btu"/>
+					<xs:enumeration value="table_btu"/>
+					<xs:enumeration value="mean_btu"/>
+					<xs:enumeration value="39F_btu"/>
+					<xs:enumeration value="59F_btu"/>
+					<xs:enumeration value="60F_btu"/>
+					<xs:enumeration value="tons_of_tnt"/>
+					<xs:enumeration value="ec_therm"/>
+					<xs:enumeration value="us_therm"/>
+					<xs:enumeration value="year_365"/>
+					<xs:enumeration value="tropical_year"/>
+					<xs:enumeration value="sidereal_year"/>
+					<xs:enumeration value="sidereal_day"/>
+					<xs:enumeration value="sidereal_hour"/>
+					<xs:enumeration value="sidereal_minute"/>
+					<xs:enumeration value="sidereal_second"/>
+					<xs:enumeration value="shake"/>
+					<xs:enumeration value="denier"/>
+					<xs:enumeration value="tex"/>
+					<xs:enumeration value="gon"/>
+					<xs:enumeration value="nato_mil"/>
+					<xs:enumeration value="pound_mole"/>
+					<xs:enumeration value="ton_refrigeration"/>
+					<xs:enumeration value="circular_mil"/>
+					<xs:enumeration value="bel"/>
+					<xs:enumeration value="neper"/>
+					<xs:enumeration value="pH"/>
+					<xs:enumeration value="petro_barrel"/>
+					<xs:enumeration value="footlambert"/>
+					<xs:enumeration value="footcandle"/>
+					<xs:enumeration value="carat"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:sourceURL"/>
+		<xs:attributeGroup ref="unitsml:prefix">
+			<xs:annotation>
+				<xs:documentation>Prefix identifier; e.g., m, k, M, G. [Enumeration order is by prefix magnitude (Y to y) followed by binary prefixes.]</xs:documentation>
+			</xs:annotation>
+		</xs:attributeGroup>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<!--     === Dimension specific Types ===-->
+	<xs:complexType name="DimensionSetType">
+		<xs:annotation>
+			<xs:documentation>Type for the dimension container.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="unitsml:Dimension" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Element to express a unit or quantity in terms of the SI base quantities length, mass, time, electric current, thermodynamic temperature, amount of substance, and luminous intensity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DimensionType">
+		<xs:annotation>
+			<xs:documentation>Type for dimension.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:annotation>
+				<xs:documentation>This unbounded sequence allows any order of any number of elements; e.g., L^1 Â· L^-1.</xs:documentation>
+			</xs:annotation>
+			<xs:element ref="unitsml:Length" minOccurs="0"/>
+			<xs:element ref="unitsml:Mass" minOccurs="0"/>
+			<xs:element ref="unitsml:Time" minOccurs="0"/>
+			<xs:element ref="unitsml:ElectricCurrent" minOccurs="0"/>
+			<xs:element ref="unitsml:ThermodynamicTemperature" minOccurs="0"/>
+			<xs:element ref="unitsml:AmountOfSubstance" minOccurs="0"/>
+			<xs:element ref="unitsml:LuminousIntensity" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute ref="xml:id" use="required"/>
+		<xs:attribute name="dimensionless" type="xs:boolean" use="optional" default="0">
+			<xs:annotation>
+				<xs:documentation>Boolean to designate that a quantity or unit is dimensionless.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="LengthType">
+		<xs:annotation>
+			<xs:documentation>Type of the quantity length.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="symbol" type="xs:token" use="optional" fixed="L">
+			<xs:annotation>
+				<xs:documentation>Symbol of the quantity length.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<xs:complexType name="MassType">
+		<xs:annotation>
+			<xs:documentation>Type of the quantity mass.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="symbol" type="xs:token" use="optional" fixed="M">
+			<xs:annotation>
+				<xs:documentation>Symbol of the quantity mass.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<xs:complexType name="TimeType">
+		<xs:annotation>
+			<xs:documentation>Type of the quantity time.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="symbol" type="xs:token" use="optional" fixed="T">
+			<xs:annotation>
+				<xs:documentation>Symbol of the quantity time.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<xs:complexType name="ElectricCurrentType">
+		<xs:annotation>
+			<xs:documentation>Type of the quantity electric current.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="symbol" type="xs:token" use="optional" fixed="I">
+			<xs:annotation>
+				<xs:documentation>Symbol of the quantity electric current.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<xs:complexType name="ThermodynamicTemperatureType">
+		<xs:annotation>
+			<xs:documentation>Type of the quantity thermodynamic temperature.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="symbol" type="xs:token" use="optional" fixed="&#920;">
+			<xs:annotation>
+				<xs:documentation>Symbol of the quantity thermodynamic temperature.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<xs:complexType name="AmountOfSubstanceType">
+		<xs:annotation>
+			<xs:documentation>Type of the quantity amount of substance.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="symbol" type="xs:token" use="optional" fixed="N">
+			<xs:annotation>
+				<xs:documentation>Symbol of the quantity amount of substance.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<xs:complexType name="LuminousIntensityType">
+		<xs:annotation>
+			<xs:documentation>Type of the quantity luminous intensity.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="symbol" type="xs:token" use="optional" fixed="J">
+			<xs:annotation>
+				<xs:documentation>Symbol of the quantity luminous intensity.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="unitsml:powerRational"/>
+	</xs:complexType>
+	<!--     === General Types ===-->
+	<xs:complexType name="NameType">
+		<xs:annotation>
+			<xs:documentation>Type for name.  Used for names in units, quantities, and prefixes.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:token">
+				<xs:attribute ref="xml:lang"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SymbolType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>Type for symbols.  Used in units, quantities, and prefixes.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:any processContents="skip" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Type of symbol representation.  Examples include ASCII, unicode, HTML, and MathML.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

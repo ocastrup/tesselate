@@ -1,0 +1,14 @@
+# Minimal conda environment with python, pip and poetry and windows Make file support.
+# Dependencies are managed by Poetry
+name: dev
+channels:
+  - conda-forge
+  # We want to have a reproducible setup, so we don't want default channels,
+  # which may be different for different users. All required channels should
+  # be listed explicitly here.
+  - nodefaults
+dependencies:
+  - m2w64-make # GNU Make for windows
+  - m2-grep # Grep for windows. For Makefile sh
+  - m2-gawk # awk for windows. for Makefile sh
+  - cookiecutter
