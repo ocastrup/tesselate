@@ -1,0 +1,19 @@
+[project]
+name = "compit"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "graphviz>=0.21",
+    "loguru>=0.7.3",
+    "matplotlib>=3.10.5",
+    "networkx>=3.5",
+    "ocx-common>=2.7.0",
+    "ocx-schema-parser>=1.8.5",
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.1",
+    "plotly>=6.3.0",
+    "pyenchant>=3.2.2",
+    "spylls>=0.1.7",
+    "typer>=0.16.0",
+]
