@@ -1,0 +1,10 @@
+[project]
+name = "tesselate"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "geomdl>=5.4.0",
+    "matplotlib>=3.10.8",
+    "triangle>=20250106",
+]
